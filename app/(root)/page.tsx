@@ -1,11 +1,13 @@
-import React from 'react'
+import Header from '@/components/Header'
 
-const page = () => {
+const Page = () => {
   return (
-    <div>
-      
-    </div>
+    <main className="wrapper page">
+      <Header title= "All Videos" subHeader="Public Library"/>
+
+    </main>
   )
 }
 
-export default page
+export default Page 
+
