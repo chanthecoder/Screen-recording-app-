@@ -216,7 +216,10 @@
 
   /* dropdown */
   .dropdown {
-    @apply absolute bg-white shadow-lg rounded-lg flex flex-col gap-2 w-full z-10 top-12;
+    @apply absolute bg-white shadow-lg rounded-lg flex flex-col gap-2 w-full z-10 top-full mt-2;
+    /* top-full = 100% (positions below button), mt-2 = 8px gap */
+    /* To adjust spacing: change mt-2 to mt-1 (4px), mt-3 (12px), mt-4 (16px), etc. */
+    /* Or use: top-[calc(100%+8px)] for custom spacing without margin */
 
     .list-item {
       @apply px-3 py-2.5 text-sm font-medium -tracking-[0.8px] relative text-dark-100 cursor-pointer hover:bg-pink-100 hover:text-white transition-colors duration-200 ease-in-out rounded-md;
