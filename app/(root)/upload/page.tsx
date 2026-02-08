@@ -20,8 +20,6 @@ const page = () => {
         // then we update it base on the latest thing that the user has typed in to ensure it is the most updated version
         const {name,value} = e.target
         setFormData((prevState)=>({...prevState, [name]:value}))
-
-
     }
     return (
         <div className="wrapper page">
@@ -43,9 +41,9 @@ const page = () => {
                     onChange={handleInputChange}
                     placeholder="Enter a description of the video"
                 />
-                <FileInput id="video" label="Video" accept="video/*" file={video.file} previewUrl={video.previewUrl} inputRef={video.inputRef} onChange={video.onChange} onReset={video.onReset} />
-                <FileInput id="thumbnail" label="Thumbnail" accept="image/*" file={thumbnail.file} previewUrl={thumbnail.previewUrl} inputRef={thumbnail.inputRef} onChange={thumbnail.onChange} onReset={thumbnail.onReset} />
-                <Formthumbnail
+                <FileInput id="video" label="Video" accept="video/*" file={video.file} previewUrl={video.previewUrl} inputRef={video.inputRef} onChange={video.onChange} onReset={video.onReset} type="video" />
+                <FileInput id="thumbnail" label="Thumbnail" accept="image/*" file={thumbnail.file} previewUrl={thumbnail.previewUrl} inputRef={thumbnail.inputRef} onChange={thumbnail.onChange} onReset={thumbnail.onReset} type="image" />
+                <FormField
                     id ="visibility" 
                     label ="Visibility"
                     value= {FormData.visibility}
