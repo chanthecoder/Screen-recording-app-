@@ -47,7 +47,7 @@ export const DEFAULT_RECORDING_CONFIG = {
   videoBitsPerSecond: 2500000,
 };
 
-export const dummyCards = [
+export const dummyCards: VideoCardProps[] = [
   {
     id: "1",
     title: "SnapChat Message",
