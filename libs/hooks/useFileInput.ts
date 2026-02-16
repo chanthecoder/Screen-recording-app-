@@ -12,6 +12,11 @@ export const useFileInput = (maxSize:number) => {
     const [duration,setDuration] = useState<number | null>(0)
     const inputRef = useRef<HTMLInputElement>(null)
 
+    // useRef does not cause a component to rerender when there is a change in the componenet 
+    // when we put inside an input tag ref = useRef , we can access the dom of the input tag directly and manipulate it 
+
+
+
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if(e.target.files?.[0]){
             const selectedFile = e.target.files?.[0]
@@ -51,9 +56,19 @@ export const useFileInput = (maxSize:number) => {
     // first check whether there is currently a file being selected if there is set it back to null 
     // also we clear out the preview url to free up memory to avoid memory leaks 
     const resetFile= ()=>{
-        if(previewUrl) URL.revokeObjectURL(previewUrl)
+        // if we were to reset the file , 1. we need to make sure we clear the pointer that is pointing to the local url in our file space
+        if(previewUrl) URL.revokeObjectURL(previewUrl);
+        setFile(null)
+        setDuration(0)
+        setPreviewUrl(null)
+
+        if (inputRef.current) inputRef.current.value=""
+
+
             
     }
+
+    return {file,previewUrl,duration,inputRef,handleFileChange,resetFile}
 
 
 }
