@@ -5,6 +5,7 @@ import FileInput from "@/components/FileInput"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { useFileInput } from "@/libs/hooks/useFileInput"
 import { MAX_THUMBNAIL_SIZE, MAX_VIDEO_SIZE } from "@/constants"
+import { uploadVideoSchema } from "@/libs/schemas/uplaodFile"
 
 
 const page = () => {
@@ -33,19 +34,40 @@ const page = () => {
         setisSubmitting(true);
 
         try{
+            // here is where we validate the input using the shcema defined 
+            // package the the data in the fields into payload
+            const payload = {
+                title: FormData.title,
+                description: FormData.description,
+                visibility: FormData.visibility, 
+              }
+            // validate the inout data of the payload
+            const result= uploadVideoSchema.safeParse(payload)
+            
+            // check whether the validation is a success or not 
+            if(!result.success){
+                const newError: Record<string,string> = {}
+                // we loop thru each of the error that is being reflected in the ZodError returned 
+                result.error.issues.forEach((issue)=>{
+                    newError[issue.path[0] as string]= issue.message
+                })
+                // we update the whole error 
+                setError(newError)
+                return
+                
+            }
+
+            // otherwise we proces to the api call to upload the file 
+            
             
 
-
         }catch(error){
+            console.log("unexpected error")
 
         }finally{
             setisSubmitting(false)
         }
-        // we need to do a few things 
-        // 1. we need to first get the form data which in this case is in the useFileInput, useFileOutput and form data
-        // 2. we need to validate all these data is actually aligned with the database schema that is being defined in the database , we are using postgress
-        // 3. we call out api enpoint that handles the uploadn 
-
+        
     }
     return (
         <div className="wrapper-md upload-page">
